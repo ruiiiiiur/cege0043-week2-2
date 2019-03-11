@@ -30,11 +30,20 @@ var busstoplayer;
 // create a variable that will hold the XMLHttpRequest() - this must be done outside a function so that all the functions can use the same variable
 var client;
 
-function loadData() {
+function loadEarthquakeData() {
 	// call the getEarthquakes code
 	// keep the alert message so that we know something is happening
 	alert("Loading data");
-	getData();
+	var layername = 'earthquakes';
+	getData(layername);
+	}
+
+function loadBusstopData() {
+	// call the getEarthquakes code
+	// keep the alert message so that we know something is happening
+	alert("Loading data");
+	var layername = 'busstops';
+	getData(layername);
 	}
 
 function removeData() {
@@ -52,7 +61,7 @@ function getData(layername) {
 		url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
 		}
 		if (layername == "busstops") {
-		url = "https://developer.cege.ucl.ac.uk:31050/cege0043-week2-2/busstops.geojson"
+		url = "https://developer.cege.ucl.ac.uk:31084/cege0043-week2-2/busstops.geojson"
 		}
 		client.open('GET',url);
 		client.onreadystatechange = dataResponse;
@@ -67,6 +76,7 @@ function dataResponse() {
 		loadLayer(geoJSONData);
 		}
 		}
+
 // convert the received data - which is text - to JSON format and add it to the map
 function loadLayer(geoJSONData) {
 		// which layer did we actually load?
@@ -98,8 +108,8 @@ function loadLayer(geoJSONData) {
 
 <!-- the mapid div will hold the map -->
 <div id="mapid" style="width: 600px; height: 400px;"></div>
-<button id="loadEarthquakeData" name="loadEData" onclick="loadData('earthquakes')">Click here to load the earthquake data </button>
-<button id="loadBusstopData" name="loadBData" onclick="loadData('busstops')">Click here to load the busstop data </button>
+<button id="loadEarthquakeData" name="loadEData" onclick="loadEarthquakeData()">Click here to load the earthquake data </button>
+<button id="loadBusstopData" name="loadBData" onclick="loadBusstopData()">Click here to load the busstop data </button>
 <button id="removeAllData" name="removeAllData" onclick="removeData()">Click here to remove all data </button>
 <!-- the following script will load the map and set the default view and zoom, as well as loading the basemap tiles -->
 <script>
