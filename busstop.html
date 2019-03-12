@@ -46,11 +46,6 @@ function loadBusstopData() {
 	getData(layername);
 	}
 
-function removeData() {
-	mymap.removeLayer(earthquakelayer);
-	mymap.removeLayer(busstoplayer);
-	mymap.setView([51.505, -0.09], 13);
-	}
 
 // create the code to get the data using an XMLHttpRequest
 function getData(layername) {
@@ -98,6 +93,24 @@ function loadLayer(geoJSONData) {
 			mymap.fitBounds(busstoplayer.getBounds());
 			}
 			}
+
+
+ // run the function when you click the REMOVE DATA BUTTON
+ function removeEarthquakeData() {
+           
+                mymap.removeLayer(earthquakelayer);
+          
+        }
+
+ // run the function when you click the REMOVE DATA BUTTON
+ function removeBusstopData() {
+            
+                mymap.removeLayer(busstoplayer);
+            }
+        
+
+
+
 </script>
 
 
@@ -110,7 +123,8 @@ function loadLayer(geoJSONData) {
 <div id="mapid" style="width: 600px; height: 400px;"></div>
 <button id="loadEarthquakeData" name="loadEData" onclick="loadEarthquakeData()">Click here to load the earthquake data </button>
 <button id="loadBusstopData" name="loadBData" onclick="loadBusstopData()">Click here to load the busstop data </button>
-<button id="removeAllData" name="removeAllData" onclick="removeData()">Click here to remove all data </button>
+<button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">Click here to remove Earthquake data </button>
+<button id="removeBusstopData" name="removeBusstopData" onclick="removeBusstopData()">Click here to remove busstop data </button>
 <!-- the following script will load the map and set the default view and zoom, as well as loading the basemap tiles -->
 <script>
 // load the map
