@@ -16,6 +16,24 @@
        #mapid { height: 180px; }
 </style>
 
+<script>
+function getLocation() {
+	alert('getting location');
+	navigator.geolocation.getCurrentPosition(getPosition);
+	}
+function getPosition(position) {
+	document.getElementById('showLocation').innerHTML = "Latitude: " + position.coords.latitude +
+	"<br>Longitude: " + position.coords.longitude;
+	L.circle([position.coords.latitude, position.coords.longitude], 500, {
+	color: 'black',
+	fillColor: '#f03',
+	fillOpacity: 0.5
+	}).addTo(mymap).bindPopup("I am a cute circle.");
+    mymap.setView([position.coords.latitude, position.coords.longitude], 13);
+}
+
+
+</script>
 <title>Leaflet and Javascript Example </title>
 
 </head>
@@ -43,7 +61,7 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 
 // load the tiles
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', 
-    {
+{
 	maxZoom: 18,
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community' 
 	             +
@@ -62,6 +80,11 @@ L.circle([51.508, -0.11], 500, {
 	fillColor: '#f03',
 	fillOpacity: 0.5
 	}).addTo(mymap).bindPopup("I am a circle.");
+
+
+
+
+
 // add a polygon with 3 end points (i.e. a triangle)
 var myPolygon = L.polygon([
 	[51.509, -0.08],
@@ -74,6 +97,9 @@ var myPolygon = L.polygon([
 	}).addTo(mymap).bindPopup("I am a polygon.");
 
 </script>
+
+<button id='getLocation' onclick='getLocation()'>Click Me to add a circle</button>
+<div id='showLocation'>Location will be displayed here</div>
 
 </body>
 
